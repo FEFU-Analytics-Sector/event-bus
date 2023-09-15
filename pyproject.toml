@@ -8,8 +8,8 @@ packages = [{include = "event_bus"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-aio-pika = "^9.2.2"
-pydantic = "1.10.2"
+aio-pika = "^9.0.5"
+pydantic = "^1.9.1"
 
 [build-system]
 requires = ["poetry-core"]

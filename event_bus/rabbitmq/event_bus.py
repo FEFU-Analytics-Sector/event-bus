@@ -31,6 +31,7 @@ class RabbitMQEventBus(AbstractEventBus):
             self.ampq_connection_url
         )
         self.channel = await self.connection.channel()
+        await self.channel.set_qos(prefetch_count=1)
         self.exchange = await self.channel.declare_exchange(
             self.exchange_name,
             type=ExchangeType.DIRECT

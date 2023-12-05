@@ -18,6 +18,11 @@ from ..abstract.exceptions import EventNotSubscribed
 class RabbitMQEventBus(AbstractEventBus):
     ampq_connection_url: str = field()
     exchange_name: str = field()
+    prefetch_count: int = field(
+        default=1,
+        init=True,
+        kw_only=True
+    )
 
     connection: AbstractRobustConnection = field(init=False)
     channel: AbstractRobustChannel = field(init=False)
@@ -31,7 +36,7 @@ class RabbitMQEventBus(AbstractEventBus):
             self.ampq_connection_url
         )
         self.channel = await self.connection.channel()
-        await self.channel.set_qos(prefetch_count=1)
+        await self.channel.set_qos(prefetch_count=self.prefetch_count)
         self.exchange = await self.channel.declare_exchange(
             self.exchange_name,
             type=ExchangeType.DIRECT

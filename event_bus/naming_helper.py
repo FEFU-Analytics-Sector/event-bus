@@ -10,22 +10,22 @@ class NamingHelper:
     consumer_name: str
 
     def exchange_name(self) -> str:
-        return f"{self.consumer_name}.{self.event_type.name()}.exchange"
+        return f"{self.consumer_name}.{self.event_type.name()}.x"
 
     def dlx_name(self) -> str:
         return f"{self.consumer_name}.{self.event_type.name()}.dlx"
 
     def queue_name(self) -> str:
-        return f"{self.consumer_name}.{self.event_type.name()}.queue"
+        return f"{self.consumer_name}.{self.event_type.name()}.q"
 
     def retry_queue_name(
         self,
         retry_number: int
     ) -> str:
-        return f"{self.consumer_name}.{self.event_type.name()}.retry_queue_{retry_number}"
+        return f"{self.consumer_name}.{self.event_type.name()}.rq_{retry_number}"
 
     def fail_queue_name(self) -> str:
-        return f"{self.consumer_name}.{self.event_type.name()}.fail_queue"
+        return f"{self.consumer_name}.{self.event_type.name()}.fq"
 
     def routing_key_name(self) -> str:
         return f"{self.event_type.name()}.rk"
@@ -34,7 +34,7 @@ class NamingHelper:
         self,
         retry_number: int
     ) -> str:
-        return f"{self.consumer_name}.{self.event_type.name()}.retry_{retry_number}_rk"
+        return f"{self.consumer_name}.{self.event_type.name()}.rrk_{retry_number}"
 
     def fail_routing_key_name(self) -> str:
-        return f"{self.consumer_name}.{self.event_type.name()}.fail_rk"
+        return f"{self.consumer_name}.{self.event_type.name()}.frk"

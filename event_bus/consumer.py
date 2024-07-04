@@ -39,10 +39,6 @@ class RabbitMQEventConsumer:
         default_factory=dict,
         init=False
     )
-    retry_policies: dict[Type[Event], RetryPolicy] = field(
-        default_factory=dict,
-        init=False
-    )
     queues: dict[Type[Event], AbstractRobustQueue] = field(
         init=False,
         default_factory=dict

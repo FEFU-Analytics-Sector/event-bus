@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "event-bus"
-version = "0.5.0"
+version = "0.5.3"
 description = "Simple library for event driven architecture"
 authors = ["FEFU Analytics sector"]
 readme = "README.md"

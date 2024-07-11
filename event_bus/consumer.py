@@ -102,8 +102,18 @@ class RabbitMQEventConsumer:
         async def message_handler(
             message: AbstractIncomingMessage
         ):
-            deserialized_event = json.loads(message.body)
-            event = event_type(**deserialized_event)
+            try:
+                deserialized_event = json.loads(message.body)
+                event = event_type(**deserialized_event)
+            except Exception:
+                self.logger.debug(message.properties.headers)
+                self.logger.error(
+                    f"exception while creating event {event_type.name()} from message",
+                    exc_info=True
+                )
+                await message.reject(requeue=False)
+                return
+
             try:
                 await event_handler(event)
                 await message.ack()

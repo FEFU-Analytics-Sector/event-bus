@@ -14,7 +14,9 @@ class Event(BaseModel):
         init=False,
         default_factory=lambda: datetime.datetime.now()
     )
-    _name_converter = re.compile(r"(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])")
+
+    def __post_init__(self):
+        self._name_converter = re.compile(r"(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])")
 
     @classmethod
     def name(cls) -> str:

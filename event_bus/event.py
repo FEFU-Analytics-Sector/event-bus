@@ -1,6 +1,7 @@
 import datetime
 import uuid
 import re
+from typing import ClassVar
 
 from pydantic import BaseModel, Field
 
@@ -14,7 +15,7 @@ class Event(BaseModel):
         init=False,
         default_factory=lambda: datetime.datetime.now()
     )
-    _name_converter = re.compile(r"(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])")
+    _name_converter: ClassVar = re.compile(r"(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])")
 
     @classmethod
     def name(cls) -> str:
